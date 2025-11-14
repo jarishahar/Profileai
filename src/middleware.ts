@@ -12,21 +12,7 @@ export async function middleware(request: NextRequest) {
     return new Response("pong", { status: 200 });
   }
 
-  //const sessionCookie = getSessionCookie(request);
-
-  // Check if user is authenticated
-  // if (!sessionCookie) {
-  //   return NextResponse.redirect(new URL("/sign-in", request.url));
-  // }
-
-  // Redirect /admin to /admin/page (if you want a default)
-  if (pathname === "/admin") {
-    return NextResponse.next(); // Let the admin layout handle access control
-  }
-
-  if (pathname === "/superadmin") {
-    return NextResponse.next(); // Let the superadmin layout handle access control
-  }
+  
 
   return NextResponse.next();
 }
