@@ -1,0 +1,51 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noUnusedLocals": true,
+    "strictPropertyInitialization": false,
+    "noUnusedParameters": false,
+    "noImplicitAny": false,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "ui/*": ["./src/components/ui/*"],
+      "auth/*": ["./src/lib/auth/*"],
+      "app-types/*": ["./src/types/*"],
+      "logger": ["./src/lib/logger.ts"],
+      "@/blocks/*": ["./src/lib/blocks/*"],
+      "@/serializer/*": ["./src/lib/serializer/*"],
+      "@/executor/*": ["./src/lib/executor/*"],
+      "@/providers/*": ["./src/lib/providers/*"],
+      "lib/*": ["./src/lib/*"],
+      "load-env": ["./src/lib/load-env.ts"],
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/types/global.d.ts",
+    ".next/types/**/*.ts",
+    "drizzle.config.ts",
+    "tests/**/*.ts"
+  ],
+  "exclude": ["node_modules"]
+}

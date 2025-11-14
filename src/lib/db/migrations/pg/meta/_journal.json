@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1762869078495,
+      "tag": "0000_kind_thanos",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1763056439791,
+      "tag": "0001_special_siren",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1763059221025,
+      "tag": "0002_lethal_young_avengers",
+      "breakpoints": true
+    }
+  ]
+}

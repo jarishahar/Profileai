@@ -1,0 +1,58 @@
+name: Deploy Next App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    # ✅ Update OPENAI_API_KEY inside .env.example (no .env file created)
+    - name: Inject OPENAI_API_KEY into .env.example
+      run: |
+        sed -i "s|^OPENAI_API_KEY=.*|OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}|" .env.example
+        sed -i "s|^POSTGRES_URL=.*|POSTGRES_URL=${{ secrets.POSTGRES_URL }}|" .env.example
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '23'
+
+    - name: Install pnpm
+      run: npm install -g pnpm
+
+    - name: Install Dependencies and Build
+      run: |
+        pnpm install
+        pnpm run build
+
+    - name: Archive Build Files
+      run: |
+        tar -czf app-build.tar.gz \
+          package.json \
+          public \
+          node_modules \
+          .env \
+          .next \
+          src/lib/db
+
+    - name: Set up SSH to Live Server
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H "${{ secrets.IP }}" >> ~/.ssh/known_hosts
+
+    - name: Upload Build Files to Server
+      run: |
+        scp app-build.tar.gz root@${{ secrets.IP }}:/var/cicd/fuzion-ai-build
+
+    - name: Run Deployment Script on Server
+      run: |
+        ssh root@${{ secrets.IP }} "bash /var/cicd/scripts/fuzion-ai.sh"

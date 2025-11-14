@@ -1,0 +1,32 @@
+{
+  "$schema": "https://railway.app/json-schema/v0.0.0/railway.json",
+  "build": {
+    "builder": "dockerfile",
+    "dockerfile": "Dockerfile"
+  },
+  "deploy": {
+    "restartPolicyType": "on_failure",
+    "restartPolicyMaxRetries": 5,
+    "healthchecks": {
+      "liveness": {
+        "type": "http",
+        "httpPath": "/health",
+        "initialDelaySeconds": 10,
+        "periodSeconds": 30,
+        "timeoutSeconds": 10,
+        "successThreshold": 1,
+        "failureThreshold": 3
+      }
+    }
+  },
+  "variables": {
+    "MCP_HTTP_PORT": {
+      "description": "Port for MCP HTTP server",
+      "default": "4400"
+    },
+    "NODE_ENV": {
+      "description": "Node environment",
+      "default": "production"
+    }
+  }
+}

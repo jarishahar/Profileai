@@ -1,0 +1,5 @@
+{
+  "project_id": "",
+  "knowledge_base_id": "",
+  "description": "Configure which project and knowledge base to expose via MCP. Leave empty to allow access to all."
+}
