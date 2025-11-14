@@ -89,10 +89,10 @@ export function BuildProfileModal({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!linkedin.trim() && !github.trim()) {
-      toast.error("Please provide at least one profile URL.");
-      return;
-    }
+    // if (!linkedin.trim() && !github.trim()) {
+    //   toast.error("Please provide at least one profile URL.");
+    //   return;
+    // }
 
     setIsSubmitting(true);
 
